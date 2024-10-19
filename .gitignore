@@ -1,0 +1,55 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Julia compiled files
+*.ji
+*.julia
+
+# Logs and debug output
+*.log
+
+# Environment and Python dependency files
+.env
+*.env
+.env.*
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+terraform.tfvars
+*.terraform.lock.hcl
+
+# Ansible
+*.retry
+inventory
+
+# Docker
+**/Dockerfile
+**/docker-compose.yml
+docker-compose.override.yml
+docker-compose.override.yaml
+.dockerignore
+**/node_modules/
+docker-compose*.yml
+docker-compose*.yaml
+docker-compose*.env
+
+# Local development environment
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Node modules (if any JavaScript is used)
+node_modules/
+
+# GitHub Actions
+!.github/
