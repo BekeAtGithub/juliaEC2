@@ -28,10 +28,10 @@ terraform.tfvars
 inventory
 
 # Docker
-**/Dockerfile
-**/docker-compose.yml
-docker-compose.override.yml
-docker-compose.override.yaml
+#**/Dockerfile
+#**/docker-compose.yml
+#docker-compose.override.yml
+#docker-compose.override.yaml
 .dockerignore
 **/node_modules/
 docker-compose*.yml
