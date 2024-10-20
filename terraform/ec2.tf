@@ -43,10 +43,10 @@ resource "aws_security_group" "app_sg" {
 
 # EC2 instance for the Julia app
 resource "aws_instance" "app" {
-  ami           = var.ami_id
-  instance_type = var.instance_type
-  key_name      = var.key_name
-  subnet_id     = module.vpc.public_subnets[0]
+  ami             = var.ami_id
+  instance_type   = var.instance_type
+  key_name        = var.key_name
+  subnet_id       = module.vpc.public_subnets[0]
   security_groups = [aws_security_group.app_sg.id]
 
   tags = {
@@ -71,10 +71,10 @@ resource "aws_instance" "app" {
 
 # EC2 instance for NGINX load balancer
 resource "aws_instance" "nginx" {
-  ami           = var.ami_id
-  instance_type = var.instance_type
-  key_name      = var.key_name
-  subnet_id     = module.vpc.public_subnets[1]
+  ami             = var.ami_id
+  instance_type   = var.instance_type
+  key_name        = var.key_name
+  subnet_id       = module.vpc.public_subnets[1]
   security_groups = [aws_security_group.app_sg.id]
 
   tags = {
@@ -106,15 +106,4 @@ resource "aws_instance" "nginx" {
 
               sudo systemctl restart nginx
               EOF
-}
-
-# Output the public IP addresses for the instances
-output "app_public_ip" {
-  description = "The public IP of the Julia app EC2 instance"
-  value       = aws_instance.app.public_ip
-}
-
-output "nginx_public_ip" {
-  description = "The public IP of the NGINX load balancer EC2 instance"
-  value       = aws_instance.nginx.public_ip
 }

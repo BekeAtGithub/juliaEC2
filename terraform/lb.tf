@@ -25,12 +25,11 @@ resource "aws_security_group" "lb_sg" {
   }
 }
 
-# Create a load balancer
 resource "aws_lb" "nginx_lb" {
   name               = "nginx-lb"
-  internal           = false   # Set to true for internal-only load balancers
+  internal           = false
   load_balancer_type = "application"
-  security_groups    = [aws_security_group.lb_sg.id]
+  security_groups    = [aws_security_group.app_sg.id]
   subnets            = module.vpc.public_subnets
 
   tags = {
@@ -38,7 +37,6 @@ resource "aws_lb" "nginx_lb" {
   }
 }
 
-# Create a target group for the EC2 instances running the app
 resource "aws_lb_target_group" "nginx_lb_target" {
   name        = "nginx-lb-targets"
   port        = 8080
@@ -59,6 +57,7 @@ resource "aws_lb_target_group" "nginx_lb_target" {
   }
 }
 
+
 # Register the EC2 instances as targets for the load balancer
 resource "aws_lb_target_group_attachment" "nginx_lb_target_attachment" {
   for_each = {
@@ -71,10 +70,9 @@ resource "aws_lb_target_group_attachment" "nginx_lb_target_attachment" {
   port             = 8080
 }
 
-# Create a listener for the load balancer
 resource "aws_lb_listener" "nginx_lb_listener" {
-  load_balancer_arn = aws_lb.nginx_lb.arn
-  port              = 80
+  load_balancer_arn = aws_lb.nginx_lb.arn  # Reference the correct load balancer ARN
+  port              = 80                   # Listening on port 80 for HTTP
   protocol          = "HTTP"
 
   default_action {
@@ -87,8 +85,3 @@ resource "aws_lb_listener" "nginx_lb_listener" {
   }
 }
 
-# Output the DNS name of the load balancer
-output "nginx_lb_dns" {
-  description = "The DNS name of the NGINX load balancer"
-  value       = aws_lb.nginx_lb.dns_name
-}

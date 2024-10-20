@@ -1,46 +1,31 @@
-# Output the public IP of the EC2 instance running the Julia app
+# Cleaned-up outputs.tf
 output "app_public_ip" {
-  description = "The public IP address of the EC2 instance running the Julia app"
+  description = "The public IP of the Julia app EC2 instance"
   value       = aws_instance.app.public_ip
 }
 
-# Output the public IP of the EC2 instance running NGINX
 output "nginx_public_ip" {
-  description = "The public IP address of the EC2 instance running NGINX"
+  description = "The public IP of the NGINX load balancer EC2 instance"
   value       = aws_instance.nginx.public_ip
 }
 
-# Output the RDS endpoint
 output "rds_endpoint" {
-  description = "The RDS endpoint for connecting to the PostgreSQL database"
-  value       = aws_db_instance.rds.endpoint
+  description = "The RDS PostgreSQL endpoint"
+  value       = aws_db_instance.julia_app_rds.endpoint
 }
 
-# Output the VPC ID
-output "vpc_id" {
-  description = "The ID of the VPC"
-  value       = module.vpc.vpc_id
-}
-
-# Output the Subnet IDs
-output "public_subnet_ids" {
-  description = "The IDs of the public subnets"
-  value       = module.vpc.public_subnets
-}
-
-output "private_subnet_ids" {
-  description = "The IDs of the private subnets"
-  value       = module.vpc.private_subnets
-}
-
-# Output the name of the RDS database
 output "rds_db_name" {
-  description = "The name of the RDS database"
-  value       = aws_db_instance.rds.name
+  description = "The RDS PostgreSQL database name"
+  value       = aws_db_instance.julia_app_rds.db_name
 }
 
-# Output the security group for the EC2 instances
-output "app_security_group_id" {
-  description = "The security group ID for the EC2 instances"
-  value       = aws_security_group.app_sg.id
+output "nginx_lb_dns" {
+  description = "The DNS name of the NGINX load balancer"
+  value       = aws_lb.nginx_lb.dns_name
 }
+
+output "app_dns_name" {
+  description = "The full DNS name for the application"
+  value       = "${var.subdomain}.${var.domain_name}"
+}
+
