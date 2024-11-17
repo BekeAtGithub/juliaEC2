@@ -3,7 +3,7 @@
 │   │   ├── main.jl          # Julia source code for the app
 │   │   ├── Database.jl      # Module for interacting with RDS database
 │   │   └── Utils.jl         # Utility functions (hostname, version handling, etc.)
-│   ├── Dockerfile           # Dockerfile for containerizing the Julia app
+│   ├── Dockerfile           # Dockerfile for containerizing the Julia app 
 │   └── requirements.txt     # Optional if any Python/other dependencies 
 ├── ansible/
 │   ├── playbook.yml         # Ansible playbook for configuring the EC2 instance and NGINX
