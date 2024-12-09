@@ -1,6 +1,6 @@
 ├── app/
 │   ├── src/
-│   │   ├── main.jl          # Julia source code for the app
+│   │   ├── main.jl          # Julia source code for the app 
 │   │   ├── Database.jl      # Module for interacting with RDS database
 │   │   └── Utils.jl         # Utility functions (hostname, version handling, etc.)
 │   ├── Dockerfile           # Dockerfile for containerizing the Julia app 
